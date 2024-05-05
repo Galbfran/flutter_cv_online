@@ -5,12 +5,47 @@ class StackTech extends StatelessWidget {
     super.key,
   });
 
-  final String stack =
-      'Full Stack Developer || Dart || Flutter || React-js || Redux || Next.js || Node.js || Express.js || PostgreSQL || Sequelize';
-  final String presentation =
-      'Apasionado desarrollador con experiencia en la creación de aplicaciones móviles y web utilizando tecnologías modernas como Flutter, Node.js, Express, Sequelize y PostgreSQL. Con un enfoque en la entrega de soluciones de alta calidad y rendimiento, participando en proyectos desde la concepción hasta la implementación, colaborando estrechamente con equipos multidisciplinarios para alcanzar los objetivos del negocio.';
-  final String experience =
-      'Mi experiencia como desarrollador en Deep Skill Academy amplió mi conjunto de habilidades, enseñándome a trabajar en equipo de manera efectiva y a aprender constantemente nuevas herramientas. Destaco mi capacidad para utilizar Flutter en el desarrollo móvil, así como la implementación de bibliotecas como Auth0 para la gestión de autenticación y las APIs de Google Maps, entre otras.';
+  @override
+  Widget build(BuildContext context) {
+    return const FractionallySizedBox(
+      widthFactor: 0.9,
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Stack de tecnologias',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+              Divider(),
+              SizedBox(
+                height: 20,
+              ),
+              Wrap(children: [
+                TechCard(
+                  url: 'https://img.icons8.com/color/344/python.png',
+                  title: 'Python',
+                )
+              ])
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TechCard extends StatelessWidget {
+  final String url;
+  final String title;
+
+  const TechCard({
+    super.key,
+    required this.url,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,91 +58,40 @@ class StackTech extends StatelessWidget {
       return 30;
     }
 
-    return FractionallySizedBox(
-      widthFactor: 0.9,
-      child: Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Stack de tecnologias',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-              const Divider(),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'Stack de tecnologias',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                stack,
-                style: TextStyle(fontSize: textSize()),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'Presentacion',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                presentation,
-                style: TextStyle(fontSize: textSize()),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                'Experiencia Profecional',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Wrap(
-                children: [
-                  Text(
-                    'Deep Skill Academy',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Text(
-                    '2023 - Actualmente',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                experience,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
+    return Card(
+      color: const Color(0xff164772),
+      elevation: 5,
+      shadowColor: Colors.white,
+      child: Column(children: [
+        Image.network(
+          url,
+          width: 300,
+          height: 200,
+          fit: BoxFit.cover,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return const CircularProgressIndicator(
+              strokeWidth: 2,
+            );
+          },
+          errorBuilder: (context, error, stackTrace) {
+            return const Text('Error cargando la imagen');
+          },
         ),
-      ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+              fontSize: textSize(),
+              color: Colors.white,
+              fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+      ]),
     );
   }
 }
